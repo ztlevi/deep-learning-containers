@@ -380,6 +380,11 @@ RUN wget https://sourceforge.net/projects/boost/files/boost/1.81.0/boost_1_81_0.
    && rm -rf boost_1_81_0 \
    && cd /usr/include/boost
 
+# Install SMP binary
+ARG SMP_URL=https://smppy.s3.amazonaws.com/tensorflow/cu118/smppy-0.3.325-cp310-cp310-linux_x86_64.whl
+RUN apt-get update && apt-get install -y libunwind-dev && apt-get clean \
+ && ${PYTHON} -m pip install --no-cache-dir ${SMP_URL}
+
 # Add NGC vars
 ENV TF_AUTOTUNE_THRESHOLD=2
 
